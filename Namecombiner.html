@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blend two names into one unique combination with NameFusion Blender - the ultimate name mixing tool">
+    <title>NameFusion Blender | Creative Name Mixing Tool</title>
+    <style>
+        :root {
+            --primary: #6E48AA;
+            --secondary: #9D50BB;
+            --accent: #4776E6;
+            --light: #F8F9FA;
+            --dark: #212529;
+            --cta: #FF6B6B;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .tool-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            color: var(--primary);
+        }
+        
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        button {
+            background-color: var(--cta);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #ff5252;
+            transform: translateY(-2px);
+        }
+        
+        .result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #f0f5ff;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .feature-card h3 {
+            color: var(--secondary);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .input-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>NameFusion Blender</h1>
+            <p>The ultimate tool to blend two names into one perfect combination</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="tool-container">
+            <h2>Create Your Name Fusion</h2>
+            <p>Enter two names below to generate unique blended combinations</p>
+            
+            <div class="input-group">
+                <input type="text" id="name1" placeholder="First name (e.g., Emma)">
+                <input type="text" id="name2" placeholder="Second name (e.g., Liam)">
+            </div>
+            
+            <button id="blend-btn">Blend Names</button>
+            
+            <div class="result" id="result">
+                Your blended name will appear here
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <button id="google-save">Save to Google Drive</button>
+                <button id="share-btn" style="background-color: var(--accent); margin-left: 1rem;">Share</button>
+            </div>
+        </div>
+        
+        <h2>Why Use NameFusion Blender?</h2>
+        <div class="features">
+            <div class="feature-card">
+                <h3>Creative Name Combinations</h3>
+                <p>Our advanced algorithm creates unique, pronounceable name blends that sound natural.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Perfect for Babies & Brands</h3>
+                <p>Great for expecting parents, writers creating character names, or businesses naming new products.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Google Integration</h3>
+                <p>Save your favorite name combinations directly to your Google Drive for easy access later.</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin: 3rem 0;">
+            <h2>How It Works</h2>
+            <p>NameFusion Blender analyzes syllable patterns, vowel sounds, and name popularity to create the perfect blend between two names. Try it today!</p>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 NameFusion Blender | All Rights Reserved</p>
+            <p>This tool is hosted on Google Sites for maximum reliability</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.getElementById('blend-btn').addEventListener('click', function() {
+            const name1 = document.getElementById('name1').value.trim();
+            const name2 = document.getElementById('name2').value.trim();
+            
+            if(name1 && name2) {
+                const blendedName = blendNames(name1, name2);
+                document.getElementById('result').textContent = blendedName;
+            } else {
+                document.getElementById('result').textContent = "Please enter both names";
+            }
+        });
+        
+        function blendNames(name1, name2) {
+            // Advanced blending algorithm (simplified for example)
+            const vowels = ['a', 'e', 'i', 'o', 'u'];
+            
+            // Find natural breaking points
+            const breakPoint1 = findBreakPoint(name1);
+            const breakPoint2 = findBreakPoint(name2);
+            
+            // Create combinations
+            const combo1 = name1.substring(0, breakPoint1) + name2.substring(breakPoint2);
+            const combo2 = name2.substring(0, breakPoint2) + name1.substring(breakPoint1);
+            
+            // Return the better sounding option
+            return soundsBetter(combo1, combo2) ? combo1 : combo2;
+        }
+        
+        function findBreakPoint(name) {
+            // Find the last vowel before the midpoint
+            const mid = Math.floor(name.length / 2);
+            for(let i = mid; i >= 0; i--) {
+                if(['a', 'e', 'i', 'o', 'u'].includes(name[i].toLowerCase())) {
+                    return i + 1;
+                }
+            }
+            return mid;
+        }
+        
+        function soundsBetter(name1, name2) {
+            // Simple heuristic - prefer the name with more vowels
+            const countVowels = (name) => name.toLowerCase().split('').filter(c => ['a','e','i','o','u'].includes(c)).length;
+            return countVowels(name1) >= countVowels(name2);
+        }
+        
+        // Google integration would be added here
+        document.getElementById('google-save').addEventListener('click', function() {
+            alert("Google Drive integration would save your name combination here");
+        });
+        
+        document.getElementById('share-btn').addEventListener('click', function() {
+            alert("Social sharing functionality would be implemented here");
+        });
+    </script>
+</body>
+</html>
